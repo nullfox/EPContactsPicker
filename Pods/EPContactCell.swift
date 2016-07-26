@@ -89,7 +89,7 @@ class EPContactCell: UITableViewCell {
             self.contactDetailTextLabel.text = contact.company! as String
         }
 
-        if (selectedContact.emails.count == 0 || selectedContact.phoneNumbers.count == 0) {
+        if (contact.emails.count == 0 || contact.phoneNumbers.count == 0) {
             self.contactDetailTextLabel.text = "Missing phone and/or email!"
         }
     }
