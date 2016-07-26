@@ -271,18 +271,6 @@ public class EPContactsPicker: UITableViewController, UISearchResultsUpdating, U
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! EPContactCell
         let selectedContact =  cell.contact!
 
-        if (selectedContact.emails.count == 0 || selectedContact.phoneNumbers.count == 0) {
-            let alert = UIAlertController(title: "Invalid Contact", message: "You may not use this contact due to missing information. Please update this contact to ensure that phone number and email exist and try again.", preferredStyle: .Alert)
-
-            alert.addAction(UIAlertAction(title: "Ok", style: .Cancel) { (action) in
-            // No-op
-            })
-
-            self.presentViewController(alert, animated: true, completion: nil)
-
-            return
-        }
-
         if multiSelectEnabled {
             //Keeps track of enable=ing and disabling contacts
             if cell.accessoryType == UITableViewCellAccessoryType.Checkmark {

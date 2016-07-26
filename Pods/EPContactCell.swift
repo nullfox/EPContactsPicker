@@ -15,11 +15,11 @@ class EPContactCell: UITableViewCell {
     @IBOutlet weak var contactImageView: UIImageView!
     @IBOutlet weak var contactInitialLabel: UILabel!
     @IBOutlet weak var contactContainerView: UIView!
-    
+
     var contact: EPContact?
-    
+
     override func awakeFromNib() {
-        
+
         super.awakeFromNib()
         // Initialization code
         selectionStyle = UITableViewCellSelectionStyle.None
@@ -30,14 +30,14 @@ class EPContactCell: UITableViewCell {
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
+
     func updateInitialsColorForIndexPath(indexpath: NSIndexPath) {
         //Applies color to Initial Label
         let colorArray = [EPGlobalConstants.Colors.amethystColor,EPGlobalConstants.Colors.asbestosColor,EPGlobalConstants.Colors.emeraldColor,EPGlobalConstants.Colors.peterRiverColor,EPGlobalConstants.Colors.pomegranateColor,EPGlobalConstants.Colors.pumpkinColor,EPGlobalConstants.Colors.sunflowerColor]
         let randomValue = (indexpath.row + indexpath.section) % colorArray.count
         contactInitialLabel.backgroundColor = colorArray[randomValue]
     }
- 
+
     func updateContactsinUI(contact: EPContact, indexPath: NSIndexPath, subtitleType: SubtitleCellValue) {
         self.contact = contact
         //Update all UI in the cell here
@@ -54,14 +54,14 @@ class EPContactCell: UITableViewCell {
             self.contactInitialLabel.hidden = false
         }
     }
-    
+
     func updateSubtitleBasedonType(subtitleType: SubtitleCellValue , contact: EPContact) {
-        
+
         switch subtitleType {
-            
+
         case SubtitleCellValue.PhoneNumber:
             let phoneNumberCount = contact.phoneNumbers.count
-            
+
             if phoneNumberCount == 1  {
                 self.contactDetailTextLabel.text = "\(contact.phoneNumbers[0].phoneNumber)"
             }
@@ -73,7 +73,7 @@ class EPContactCell: UITableViewCell {
             }
         case SubtitleCellValue.Email:
             let emailCount = contact.emails.count
-        
+
             if emailCount == 1  {
                 self.contactDetailTextLabel.text = "\(contact.emails[0].email)"
             }
@@ -87,6 +87,10 @@ class EPContactCell: UITableViewCell {
             self.contactDetailTextLabel.text = contact.birthdayString
         case SubtitleCellValue.Organization:
             self.contactDetailTextLabel.text = contact.company! as String
+        }
+
+        if (selectedContact.emails.count == 0 || selectedContact.phoneNumbers.count == 0) {
+            self.contactDetailTextLabel.text = "Missing phone and/or email!"
         }
     }
 }
