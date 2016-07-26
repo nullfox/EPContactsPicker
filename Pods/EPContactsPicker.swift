@@ -271,6 +271,10 @@ public class EPContactsPicker: UITableViewController, UISearchResultsUpdating, U
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! EPContactCell
         let selectedContact =  cell.contact!
 
+        if (selectedContact.emails.count == 0 || selectedContact.phoneNumbers.count == 0) {
+            return
+        }
+
         if multiSelectEnabled {
             //Keeps track of enable=ing and disabling contacts
             if cell.accessoryType == UITableViewCellAccessoryType.Checkmark {
